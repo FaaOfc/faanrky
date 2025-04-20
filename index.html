@@ -1,36 +1,29 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Faanrky Store - Homepage</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faanrky Store</title>
+  <link rel="icon" type="image/x-icon" href="20250325_070407.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Bungee', cursive;
-      background-image: url('Background.jpg') no-repeat center center fixed;
+      margin: 0;
+      font-family: 'Bungee', sans-serif;
+      font-size: 10px;
+      background-image: url('Background.jpg'); /* Gambar lokal */
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       background-attachment: fixed;
-      margin: 0;
-      padding: 20px;
       text-align: center;
-    }
-
-    h1 {
-      margin-bottom: 10px;
+      color: white;
     }
 
     .container {
-      max-width: 1200px;
-      margin: auto;
       padding: 20px;
-    }
-
-    .profile {
-      text-align: center;
-      margin-bottom: 30px;
     }
 
     .profile img {
@@ -40,57 +33,58 @@
       border: 3px solid white;
     }
 
-    .social-icons a {
-      margin: 0 10px;
-      color: rgba(0, 0, 0, 1);
-      font-size: 24px;
-    }
-
-    .section {
-      background-color: white;
-      margin: 20px auto;
-      max-width: 500px;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border: 2px solid rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .section img {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .section p {
-      margin: 15px 0;
-      font-size: 10px;
-      text-align: center;
-    }
-
-    .btn {
-      font-family: 'Bungee', cursive;
-      display: block;
-      padding: 10px;
-      background: black;
-      color: white;
-      border: 2px solid white;
-      border-radius: 20px;
-      text-decoration: none;
-      transition: 0.3s;
-      width: 100%;
-      text-align: center;
-      box-sizing: border-box;
-      font-size: 10px;
-      cursor: pointer;
+    .social-icons {
       margin-top: 10px;
     }
 
-    .btn:hover {
-      background: white;
+    .social-icons a {
+      margin: 0 10px;
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .qris-box {
+      width: 400px;
+      margin: 20px auto;
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid white;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .qris-box img {
+      width: 400px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    .qris-box h3 {
+      margin: 10px 0 5px;
+    }
+
+    .qris-box p {
+      font-size: 9px;
+    }
+
+    .qris-button {
+      display: block;
+      background-color: white;
       color: black;
+      border: none;
+      border-radius: 5px;
+      margin: 5px auto;
+      padding: 2px 10px;
+      height: 15px;
+      font-size: 9px;
+      line-height: 15px;
+      width: 90%;
+      max-width: 300px;
+      text-decoration: none;
+    }
+
+    .qris-button:hover {
+      background-color: #ddd;
     }
   </style>
 </head>
@@ -101,35 +95,46 @@
       <h1>Faanrky Store</h1>
       <p>Jika Ragu Jangan Beli, Hanya Menerima Yang Pasti</p>
       <div class="social-icons">
-        <a href="https://instagram.com/faanrky"><i class="fab fa-instagram"></i></a>
-        <a href="https://twitter.com/-"><i class="fab fa-twitter"></i></a>
-        <a href="https://tiktok.com/@fanurrizki"><i class="fab fa-tiktok"></i></a>
-        <a href="https://wa.me/62895404774374"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com/faanrky">Instagram</a>
+        <a href="https://tiktok.com/@fanurrizki">TikTok</a>
+        <a href="https://wa.me/62895404774374">WhatsApp</a>
       </div>
     </div>
 
-    <div class="section">
-      <img src="img/produk.jpg" alt="Produk">
-      <p>Lihat berbagai produk yang kami tawarkan mulai dari barang unik hingga kebutuhan harian.</p>
-      <a class="btn" href="https://faanrkystore.vercel.app">Menuju Halaman Produk</a>
+    <!-- Contoh QRIS Box -->
+    <div class="qris-box">
+      <img src="qris1.jpg" alt="QRIS 1">
+      <h3>Produk</h3>
+      <p>Deskripsi singkat produk ini di sini</p>
+      <a class="qris-button" href="https://contoh1.com" target="_blank">Produk</a>
     </div>
 
-    <div class="section">
-      <img src="img/fun.jpg" alt="Fun">
-      <p>Nikmati konten seru dan menarik seperti meme, tips ringan, dan video pendek.</p>
-      <a class="btn" href="fun.html">Menuju Halaman Fun</a>
+    <div class="qris-box">
+      <img src="qris2.jpg" alt="QRIS 2">
+      <h3>Fun</h3>
+      <p>Deskripsi singkat untuk hiburan</p>
+      <a class="qris-button" href="https://contoh2.com" target="_blank">Fun</a>
     </div>
 
-    <div class="section">
-      <img src="img/about.jpg" alt="Tentang Kami">
-      <p>Kenali lebih dalam tentang Faanrky Store, visi kami, dan siapa di balik layar.</p>
-      <a class="btn" href="about.html">Tentang Kami</a>
+    <div class="qris-box">
+      <img src="qris3.jpg" alt="QRIS 3">
+      <h3>About</h3>
+      <p>Tentang kami dan informasi lainnya</p>
+      <a class="qris-button" href="https://contoh3.com" target="_blank">About</a>
     </div>
 
-    <div class="section">
-      <img src="img/kontak.jpg" alt="Kontak">
-      <p>Hubungi kami untuk pertanyaan, kerja sama, atau sekadar menyapa.</p>
-      <a class="btn" href="kontak.html">Hubungi Kami</a>
+    <div class="qris-box">
+      <img src="qris4.jpg" alt="QRIS 4">
+      <h3>Contact Person</h3>
+      <p>Hubungi admin atau pemilik</p>
+      <a class="qris-button" href="https://contoh4.com" target="_blank">Contact Person</a>
+    </div>
+
+    <div class="qris-box">
+      <img src="qris5.jpg" alt="QRIS 5">
+      <h3>Team</h3>
+      <p>Kenali tim kami lebih dekat</p>
+      <a class="qris-button" href="https://contoh5.com" target="_blank">Team</a>
     </div>
   </div>
 </body>
