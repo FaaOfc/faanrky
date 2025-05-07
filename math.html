@@ -9,15 +9,43 @@
       height: 100%; margin: 0; padding: 0;
       background: linear-gradient(120deg, #2193b0 0%, #6dd5ed 100%);
       min-height: 100vh;
+      display: flex;
     }
     body {
       font-family: 'Segoe UI', 'Arial', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      width: 100%;
+    }
+    .sidebar {
+      background-color: #1976d2;
+      width: 220px;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding: 20px;
+      box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+    }
+    .sidebar h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+    .sidebar ul {
+      padding: 0;
+      list-style: none;
+    }
+    .sidebar ul li {
+      margin-bottom: 15px;
+    }
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+    }
+    .sidebar ul li a:hover {
+      color: #ffee58;
     }
     .container {
+      margin-left: 240px;
       background: rgba(255,255,255,0.96);
       border-radius: 18px;
       box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
@@ -130,6 +158,18 @@
   </style>
 </head>
 <body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Soal</a></li>
+      <li><a href="#">Profil</a></li>
+      <li><a href="#">Tentang</a></li>
+    </ul>
+  </div>
+
+  <!-- Konten Utama -->
   <div class="container">
     <h1>Quiz Matematika</h1>
     <div>
@@ -266,23 +306,24 @@
         feedback.textContent = `Salah! Jawaban yang benar: ${correctAnswer}`;
         feedback.style.color = "red";
       }
-        feedback.classList.add("show");
-  submit.disabled = true;
-  next.style.display = 'inline-block';
-};
 
-next.onclick = function() {
-  idx++;
-  if (idx < TOTAL_SOAL) {
-    tampilkanSoal();
-  } else {
-    game.classList.add('hide');
-    result.classList.remove('hide');
-    score.textContent = `Kamu menjawab ${benar} soal dengan benar!`;
-  }
-};
+      feedback.classList.add("show");
+      submit.disabled = true;
+      next.style.display = 'inline-block';
+    };
 
-resetGame();
-</script>
+    next.onclick = function() {
+      idx++;
+      if (idx < TOTAL_SOAL) {
+        tampilkanSoal();
+      } else {
+        game.classList.add('hide');
+        result.classList.remove('hide');
+        score.textContent = `Kamu menjawab ${benar} soal dengan benar!`;
+      }
+    };
+
+    resetGame();
+  </script>
 </body>
 </html>
