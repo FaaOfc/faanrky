@@ -1,204 +1,173 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Quiz Matematika</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
-      background: url('Background.jpg') no-repeat center center fixed;
+      background: url('background.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Segoe UI', 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .container {
-  background: rgba(255, 255, 255, 0.1); /* transparan */
-  border: 2px solid #000; /* outline hitam */
-  border-radius: 18px;
-  box-shadow: none;
-  max-width: 390px;
-  width: 100%;
-  padding: 36px 26px 30px 26px;
-  margin: 40px auto;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid black;
+      border-radius: 18px;
+      padding: 36px 26px 30px 26px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     h1 {
-      color: #ffffff;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
+      color: #000;
       font-size: 1.6em;
-      font-weight: 800;
+      margin-bottom: 12px;
     }
 
     .mode-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 20px;
       justify-content: center;
+      margin-bottom: 16px;
     }
 
     .mode-buttons button {
-  padding: 8px 14px;
-  border: 2px solid #000;
-  border-radius: 8px;
-  background: #000;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
+      padding: 8px 14px;
+      border: 2px solid #000;
+      border-radius: 8px;
+      background: #000;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
 
-.mode-buttons button:hover {
-  background: #333;
-  color: #fff;
-}
+    .mode-buttons button:hover {
+      background: #333;
+    }
 
-.mode-buttons button.active {
-  background: #fff;
-  color: #000;
-  font-weight: 700;
-}
+    .mode-buttons button.active {
+      background: #fff;
+      color: #000;
+      font-weight: 700;
+    }
 
     #progress {
-      color: #1393b0;
+      color: #000;
       font-weight: 600;
-      background: #f0f7fa;
-      display: inline-block;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 1em;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
 
     #soal {
       font-size: 1.25em;
-      margin: 26px 0 24px 0;
-      color: #222;
-      min-height: 56px;
-      letter-spacing: 0.01em;
+      margin: 18px 0;
       font-weight: 500;
+      color: #111;
     }
 
     #input-jawaban {
       width: 100%;
-      padding: 13px;
-      font-size: 1.05em;
-      border: 2px solid #b7e0ef;
+      padding: 12px;
+      font-size: 1em;
+      border: 2px solid #000;
       border-radius: 8px;
-      outline: none;
-      margin-bottom: 10px;
-      background: #f7fdff;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.8);
     }
 
-    #input-jawaban:focus {
-      border-color: #1976d2;
-      background: #e6f7fb;
-    }
-
-    #submit, #next, #restart-btn, #home-btn {
+    button {
       width: 100%;
-      padding: 13px 0;
-      margin-top: 14px;
-      font-size: 1.1em;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 1em;
       font-weight: 600;
-      letter-spacing: 1px;
-      border: none;
+      border: 2px solid black;
       border-radius: 8px;
-      background: linear-gradient(90deg, #1976d2 60%, #6dd5ed 100%);
+      background: #000;
       color: #fff;
       cursor: pointer;
-      transition: background 0.22s, transform 0.13s;
-      display: block;
-      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.11);
-      text-decoration: none;
-      text-align: center;
+      transition: 0.2s;
     }
 
-    #submit:disabled {
-      background: #b1bfd6;
-      color: #eaeaea;
+    button:hover {
+      background: #333;
+    }
+
+    button:disabled {
+      background: #aaa;
       cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    #next {
-      background: linear-gradient(90deg, #43cea2 60%, #185a9d 100%);
-      display: none;
-    }
-
-    #restart-btn {
-      background: linear-gradient(90deg, #f7971e 60%, #ffd200 100%);
-      color: #333;
-      margin-top: 28px;
-      font-size: 1em;
     }
 
     #feedback {
-      min-height: 34px;
-      margin-top: 12px;
-      font-size: 1.09em;
-      font-weight: 700;
-      opacity: 0;
-      transition: opacity 0.26s;
+      margin-top: 10px;
+      font-weight: 600;
+      min-height: 20px;
     }
 
-    #feedback.show {
-      opacity: 1;
-      animation: pop 0.4s;
+    #restart-btn {
+      background: #000;
+      color: #fff;
     }
 
-    @keyframes pop {
-      0% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+    #restart-btn:hover {
+      background: #333;
     }
 
-    #score {
-      font-size: 1.2em;
-      margin: 18px 0 6px 0;
-      color: #185a9d;
-      font-weight: 700;
+    #home-btn {
+      margin-top: 20px;
+      display: block;
+      background: #000;
+      color: white;
+      text-decoration: none;
+      border: 2px solid black;
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 12px;
     }
 
-    .hide { display: none; }
+    #home-btn:hover {
+      background: #333;
+    }
+
+    .hide {
+      display: none;
+    }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h1>Quiz Matematika</h1>
-
-    <div id="mode-container">
-      <p style="margin-bottom: 10px; font-weight: bold; color: #1976d2;">Pilih Mode:</p>
-      <div class="mode-buttons">
-        <button data-mode="easy" class="active">Easy</button>
-        <button data-mode="medium">Medium</button>
-        <button data-mode="hard">Hard</button>
-        <button data-mode="very-hard">Very Hard</button>
-        <button data-mode="impossible">Impossible</button>
-        <button data-mode="very-impossible">Very Impossible</button>
-      </div>
+    <div class="mode-buttons" id="mode-buttons">
+      <button data-mode="easy" class="active">Easy</button>
+      <button data-mode="medium">Medium</button>
+      <button data-mode="hard">Hard</button>
+      <button data-mode="very-hard">Very Hard</button>
+      <button data-mode="impossible">Impossible</button>
+      <button data-mode="very-impossible">Very Impossible</button>
     </div>
-
     <div id="game">
       <div id="progress"></div>
       <div id="soal"></div>
-      <input type="number" id="input-jawaban" placeholder="Tulis jawaban" autocomplete="off"/>
+      <input type="number" id="input-jawaban" placeholder="Tulis jawaban" />
       <button id="submit">Jawab</button>
       <div id="feedback"></div>
-      <button id="next">Soal Selanjutnya</button>
+      <button id="next" style="display:none;">Soal Selanjutnya</button>
       <a id="home-btn" href="index.html">Home</a>
     </div>
-
     <div id="result" class="hide">
-      <h2 style="color:#1976d2;">Selesai!</h2>
+      <h2>Selesai!</h2>
       <div id="score"></div>
       <button id="restart-btn" onclick="location.reload()">Main Lagi</button>
     </div>
@@ -211,24 +180,15 @@
     let idx = 0;
     let benar = 0;
 
-    const modeButtons = document.querySelectorAll(".mode-buttons button");
-    modeButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        modeButtons.forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
-        mode = button.dataset.mode;
+    const modeButtons = document.querySelectorAll('.mode-buttons button');
+    modeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        mode = btn.dataset.mode;
         resetGame();
       });
     });
-
-    function resetGame() {
-      idx = 0;
-      benar = 0;
-      buatSoalArr();
-      tampilkanSoal();
-      document.getElementById("result").classList.add("hide");
-      document.getElementById("game").classList.remove("hide");
-    }
 
     function generateSoal() {
       const ops = ['+', '-', '×', '÷'];
@@ -256,6 +216,7 @@
       }
 
       let soal, jawaban;
+
       if (op === '+') {
         soal = `${a} + ${b}`;
         jawaban = a + b;
@@ -298,20 +259,18 @@
       soalDiv.textContent = data.soal;
       input.value = '';
       feedback.textContent = '';
-      feedback.classList.remove('show');
       submit.disabled = false;
       next.style.display = 'none';
       input.focus();
     }
 
-    submit.onclick = function() {
+    submit.onclick = function () {
       const userAnswer = parseInt(input.value);
       const correctAnswer = soalArr[idx].jawaban;
 
       if (isNaN(userAnswer)) {
         feedback.textContent = "Masukkan angka yang valid!";
         feedback.style.color = "red";
-        feedback.classList.add("show");
         return;
       }
 
@@ -324,12 +283,11 @@
         feedback.style.color = "red";
       }
 
-      feedback.classList.add("show");
       submit.disabled = true;
-      next.style.display = 'inline-block';
+      next.style.display = 'block';
     };
 
-    next.onclick = function() {
+    next.onclick = function () {
       idx++;
       if (idx < TOTAL_SOAL) {
         tampilkanSoal();
@@ -339,6 +297,15 @@
         score.textContent = `Kamu menjawab ${benar} soal dengan benar!`;
       }
     };
+
+    function resetGame() {
+      idx = 0;
+      benar = 0;
+      buatSoalArr();
+      tampilkanSoal();
+      game.classList.remove('hide');
+      result.classList.add('hide');
+    }
 
     resetGame();
   </script>
