@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maintenance</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('Background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid black;
+      padding: 40px 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 90%;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .image-box {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      background-color: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .btn {
+      margin-top: 20px;
+      background-color: #ffffff;
+      color: #000;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      border: 2px solid black;
+      transition: background-color 0.3s;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background-color: #ddd;
+    }
+
+    .countdown {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #ccc;
+    }
+
+    .contact {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .contact a {
+      color: #aaa;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image-box">
+      <!-- Ganti dengan gambar PNG kamu -->
+      <img src="maintenance.png" alt="Maintenance" />
+    </div>
+    <h1>Website Under Maintenance</h1>
+    <p>Sedang dalam pemeliharaan. Silakan kembali nanti.</p>
+    
+    <!-- Countdown -->
+    <div class="countdown">
+      Estimasi selesai: <span id="countdown">Loading...</span>
+    </div>
+
+    <!-- Tombol kembali ke index -->
+    <a class="btn" href="index.html">Kembali ke Beranda</a>
+
+    <!-- Sosial Media -->
+    <div class="contact">
+      Hubungi kami: 
+      <a href="https://wa.me/62895404774374" target="_blank">WhatsApp</a> | 
+      <a href="https://instagram.com/akunmu" target="_blank">Instagram</a> | 
+      <a href="mailto:email@example.com" target="_blank">Email</a>
+    </div>
+  </div>
+
+  <script>
+    // Ganti tanggal di sini (format: 'YYYY-MM-DDTHH:MM:SS')
+    const targetTime = new Date("2025-05-10T18:00:00").getTime();
+
+    const countdownEl = document.getElementById("countdown");
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = targetTime - now;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = "Maintenance selesai.";
+        return;
+      }
+
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `${hours}j ${minutes}m ${seconds}d`;
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
