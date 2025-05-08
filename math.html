@@ -15,18 +15,18 @@
     }
 
     .container {
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 18px;
-      border: 4px solid black;
-      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
-      max-width: 390px;
-      width: 100%;
-      padding: 36px 26px 30px 26px;
-      margin: 40px auto;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.1); /* transparan */
+  border: 2px solid #000; /* outline hitam */
+  border-radius: 18px;
+  box-shadow: none;
+  max-width: 390px;
+  width: 100%;
+  padding: 36px 26px 30px 26px;
+  margin: 40px auto;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
     }
 
     h1 {
@@ -46,26 +46,26 @@
     }
 
     .mode-buttons button {
-      padding: 8px 14px;
-      border: none;
-      border-radius: 8px;
-      background: #e0f0ff;
-      color: #1976d2;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+  padding: 8px 14px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  background: #000;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-    .mode-buttons button:hover {
-      background: #1976d2;
-      color: white;
-    }
+.mode-buttons button:hover {
+  background: #333;
+  color: #fff;
+}
 
-    .mode-buttons button.active {
-      background: #1976d2;
-      color: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
+.mode-buttons button.active {
+  background: #fff;
+  color: #000;
+  font-weight: 700;
+}
 
     #progress {
       color: #1393b0;
