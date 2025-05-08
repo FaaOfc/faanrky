@@ -6,70 +6,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     html, body {
-      height: 100%; margin: 0; padding: 0;
-      background: linear-gradient(120deg, #2193b0 0%, #6dd5ed 100%);
-      min-height: 100vh;
-      display: flex;
-    }
-    body {
-      font-family: 'Segoe UI', 'Arial', sans-serif;
-      width: 100%;
-    }
-    .sidebar {
-      background-color: #1976d2;
-      width: 220px;
-      height: 100vh;
-      position: fixed;
-      left: 0;
-      top: 0;
-      padding: 20px;
-      box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
-    }
-    .sidebar h2 {
-      color: white;
-      margin-bottom: 20px;
-    }
-    .sidebar ul {
+      height: 100%;
+      margin: 0;
       padding: 0;
-      list-style: none;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
     }
-    .sidebar ul li {
-      margin-bottom: 15px;
-    }
-    .sidebar ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.1em;
-    }
-    .sidebar ul li a:hover {
-      color: #ffee58;
-    }
+
     .container {
-      margin-left: 240px; /* Memberikan ruang untuk sidebar */
-      margin-right: 20px;
-      background: rgba(255,255,255,0.96);
+      background: rgba(255, 255, 255, 0.96);
       border-radius: 18px;
       box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
       max-width: 390px;
       width: 100%;
       padding: 36px 26px 30px 26px;
-      margin-top: 24px;
-      margin-bottom: 24px;
+      margin: 40px auto;
       text-align: center;
       position: relative;
       overflow: hidden;
       box-sizing: border-box;
-      display: block;
-      margin-left: 24px;
-      margin-right: 24px;
     }
+
     h1 {
       color: #1976d2;
-      margin-bottom: 4px;
+      margin-bottom: 10px;
       letter-spacing: 2px;
       font-size: 1.6em;
       font-weight: 800;
     }
+
+    .mode-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .mode-buttons button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      background: #e0f0ff;
+      color: #1976d2;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mode-buttons button:hover {
+      background: #1976d2;
+      color: white;
+    }
+
+    .mode-buttons button.active {
+      background: #1976d2;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
     #progress {
       color: #1393b0;
       font-weight: 600;
@@ -80,6 +76,7 @@
       font-size: 1em;
       margin-bottom: 16px;
     }
+
     #soal {
       font-size: 1.25em;
       margin: 26px 0 24px 0;
@@ -88,26 +85,27 @@
       letter-spacing: 0.01em;
       font-weight: 500;
     }
+
     #input-jawaban {
       width: 100%;
-      padding: 13px 13px;
+      padding: 13px;
       font-size: 1.05em;
       border: 2px solid #b7e0ef;
       border-radius: 8px;
       outline: none;
       margin-bottom: 10px;
-      transition: border-color 0.2s;
       background: #f7fdff;
-      box-sizing: border-box;
     }
+
     #input-jawaban:focus {
       border-color: #1976d2;
       background: #e6f7fb;
     }
-    #submit, #next, #restart-btn {
+
+    #submit, #next, #restart-btn, #home-btn {
       width: 100%;
       padding: 13px 0;
-      margin: 14px 0 0 0;
+      margin-top: 14px;
       font-size: 1.1em;
       font-weight: 600;
       letter-spacing: 1px;
@@ -116,69 +114,78 @@
       background: linear-gradient(90deg, #1976d2 60%, #6dd5ed 100%);
       color: #fff;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.11);
       transition: background 0.22s, transform 0.13s;
       display: block;
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.11);
+      text-decoration: none;
+      text-align: center;
     }
+
     #submit:disabled {
       background: #b1bfd6;
       color: #eaeaea;
       cursor: not-allowed;
       box-shadow: none;
     }
+
     #next {
       background: linear-gradient(90deg, #43cea2 60%, #185a9d 100%);
       display: none;
     }
+
     #restart-btn {
       background: linear-gradient(90deg, #f7971e 60%, #ffd200 100%);
       color: #333;
       margin-top: 28px;
       font-size: 1em;
     }
+
     #feedback {
       min-height: 34px;
       margin-top: 12px;
       font-size: 1.09em;
       font-weight: 700;
-      letter-spacing: 0.02em;
       opacity: 0;
-      transition: opacity 0.26s, color 0.22s;
+      transition: opacity 0.26s;
     }
+
     #feedback.show {
       opacity: 1;
       animation: pop 0.4s;
     }
+
     @keyframes pop {
       0% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
+
     #score {
       font-size: 1.2em;
       margin: 18px 0 6px 0;
       color: #185a9d;
       font-weight: 700;
-      letter-spacing: 0.02em;
     }
+
     .hide { display: none; }
   </style>
 </head>
 <body>
 
-  <!-- Konten Utama -->
   <div class="container">
     <h1>Quiz Matematika</h1>
-    <div>
-      <label for="mode">Pilih Mode:</label>
-      <select id="mode">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-        <option value="very-impossible">Very Hard</option>
-        <option value="impossible">Impossible</option>
-        <option value="very-impossible">Very Impossible</option>
-      </select>
+
+    <div id="mode-container">
+      <p style="margin-bottom: 10px; font-weight: bold; color: #1976d2;">Pilih Mode:</p>
+      <div class="mode-buttons">
+        <button data-mode="easy" class="active">Easy</button>
+        <button data-mode="medium">Medium</button>
+        <button data-mode="hard">Hard</button>
+        <button data-mode="very-hard">Very Hard</button>
+        <button data-mode="impossible">Impossible</button>
+        <button data-mode="very-impossible">Very Impossible</button>
+      </div>
     </div>
+
     <div id="game">
       <div id="progress"></div>
       <div id="soal"></div>
@@ -186,30 +193,31 @@
       <button id="submit">Jawab</button>
       <div id="feedback"></div>
       <button id="next">Soal Selanjutnya</button>
-      <div style="text-align: center; margin: 20px auto;">
-  <a href="fun-home.html" style="display: inline-block; padding: 12px 28px; background: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: background 0.3s;">
-    Home
-  </a>
-      </div>
+      <a id="home-btn" href="index.html">Home</a>
     </div>
+
     <div id="result" class="hide">
-      <h2 style="color:#1976d2;font-size:1.3em;margin:12px 0 3px 0;">Selesai!</h2>
+      <h2 style="color:#1976d2;">Selesai!</h2>
       <div id="score"></div>
       <button id="restart-btn" onclick="location.reload()">Main Lagi</button>
     </div>
   </div>
+
   <script>
-    // Game Mode Variables
-    const modeSelect = document.getElementById("mode");
     const TOTAL_SOAL = 10;
     let mode = "easy";
     let soalArr = [];
     let idx = 0;
     let benar = 0;
 
-    modeSelect.addEventListener("change", (e) => {
-      mode = e.target.value;
-      resetGame();
+    const modeButtons = document.querySelectorAll(".mode-buttons button");
+    modeButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        modeButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        mode = button.dataset.mode;
+        resetGame();
+      });
     });
 
     function resetGame() {
@@ -217,6 +225,8 @@
       benar = 0;
       buatSoalArr();
       tampilkanSoal();
+      document.getElementById("result").classList.add("hide");
+      document.getElementById("game").classList.remove("hide");
     }
 
     function generateSoal() {
@@ -224,7 +234,6 @@
       const op = ops[Math.floor(Math.random() * ops.length)];
       let a, b;
 
-      // Adjust range based on the selected mode
       if (mode === "easy") {
         a = Math.floor(Math.random() * 20) + 1;
         b = Math.floor(Math.random() * 20) + 1;
@@ -246,12 +255,11 @@
       }
 
       let soal, jawaban;
-
       if (op === '+') {
         soal = `${a} + ${b}`;
         jawaban = a + b;
       } else if (op === '-') {
-        if (a < b) [a, b] = [b, a]; // Hindari hasil negatif
+        if (a < b) [a, b] = [b, a];
         soal = `${a} - ${b}`;
         jawaban = a - b;
       } else if (op === '×') {
