@@ -87,22 +87,22 @@
 
         const urls = data.result.downloadUrls;
 
-        resultContainer.innerHTML = urls.map(item => {
-          const isVideo = item.includes(".mp4");
-          return `
-            <div class="mb-4">
-              ${isVideo ? `
-                <video controls class="w-full rounded-lg shadow-md mb-2">
-                  <source src="${item}" type="video/mp4">
-                </video>
-              ` : `
-                <img src="${item}" class="w-full rounded-lg shadow-md mb-2" loading="lazy">
-              `}
-              <a href="${item}" download class="inline-block mt-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
-                ⬇️ Download ⬇️
-              </a>
-            </div>
-          `;
+resultContainer.innerHTML = urls.map(item => {
+  const isVideo = item.includes(".mp4");
+  return `
+    <div class="mb-4">
+      ${isVideo ? `
+        <video controls class="w-full rounded-lg shadow-md mb-2">
+          <source src="${item}" type="video/mp4">
+        </video>
+      ` : `
+        <img src="${item}" class="w-full rounded-lg shadow-md mb-2" loading="lazy" alt="Preview Gambar Instagram">
+      `}
+      <a href="${item}" download class="inline-block mt-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
+        ⬇️ Download
+      </a>
+    </div>
+  `;
         }).join("");
 
       } catch (error) {
