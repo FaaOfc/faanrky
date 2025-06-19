@@ -3,10 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IGDL - Faanrky</title>
+  <title>IG Downloader by Faanrky</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { darkMode: 'class' };
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            bungee: ['Bungee', 'cursive']
+          }
+        }
+      }
+    };
   </script>
   <style>
     .floating-btn {
@@ -22,37 +32,41 @@
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col justify-between relative">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col justify-between font-bungee relative">
 
   <!-- Tombol Kembali (Kiri Atas) -->
   <a href="https://store.faanrky.my.id" class="floating-btn absolute top-4 left-4 z-50">
-    🔙 Beranda
+    🔙
   </a>
 
   <!-- Tombol Ganti Tema (Kanan Atas) -->
   <button onclick="toggleTheme()" class="floating-btn absolute top-4 right-4 z-50">
-    🌗 Tema
+    🌗
   </button>
 
-  <!-- Kontainer utama -->
-  <main class="flex-grow flex flex-col items-center justify-center p-6">
-    <div class="w-full max-w-md bg-black bg-opacity-20 border border-black p-6 rounded-xl shadow-xl" style="margin: 0 15px;">
-      <h1 class="text-2xl font-bold mb-4 text-center">Instagram Downloader</h1>
+  <!-- Judul Mini -->
+  <div class="mt-20 flex justify-center">
+    <div class="floating-btn text-center">
+      📥 Instagram Downloader 📥<br>
+      <span class="text-xs">Powered by FlowFalcon API</span>
+    </div>
+  </div>
 
+  <!-- Kontainer -->
+  <main class="flex-grow flex flex-col items-center justify-center p-6">
+    <div class="w-full max-w-md bg-gray-800 p-6 rounded-xl shadow-xl">
       <label for="urlInput" class="block text-lg font-medium mb-2">Masukkan URL Instagram:</label>
       <input id="urlInput" type="text" placeholder="https://www.instagram.com/reel/..." class="w-full p-3 mb-4 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
-
       <button onclick="downloadMedia()" class="w-full bg-purple-600 hover:bg-purple-700 transition-colors p-3 rounded font-semibold">
         Download
       </button>
-
       <div id="result" class="mt-6 space-y-4 text-center"></div>
     </div>
   </main>
 
   <!-- Footer -->
   <footer class="text-center text-sm p-4 text-gray-400">
-    &copy; 2025 Alfa. All rights reserved.
+    &copy; 2025 Faanrky. All rights reserved.
   </footer>
 
   <!-- Script -->
@@ -71,33 +85,25 @@
           return;
         }
 
-        const title = data.result.title || "Video Instagram";
-        const thumbnail = data.result.thumbnail;
         const urls = data.result.downloadUrls;
 
-        resultContainer.innerHTML = `
-          <div class="text-left">
-            <h2 class="text-xl font-semibold mb-2">${title}</h2>
-            <img src="${thumbnail}" alt="Thumbnail" class="w-full rounded-lg mb-4 shadow-md">
-          </div>
-          ${urls.map(item => {
-            const isVideo = item.includes(".mp4");
-            return `
-              <div class="mb-4">
-                ${isVideo ? `
-                  <video controls class="w-full rounded-lg shadow-md mb-2">
-                    <source src="${item}" type="video/mp4">
-                  </video>
-                ` : `
-                  <img src="${item}" class="w-full rounded-lg shadow-md mb-2" loading="lazy">
-                `}
-                <a href="${item}" download class="inline-block mt-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
-                  ⬇️ Download
-                </a>
-              </div>
-            `;
-          }).join("")}
-        `;
+        resultContainer.innerHTML = urls.map(item => {
+          const isVideo = item.includes(".mp4");
+          return `
+            <div class="mb-4">
+              ${isVideo ? `
+                <video controls class="w-full rounded-lg shadow-md mb-2">
+                  <source src="${item}" type="video/mp4">
+                </video>
+              ` : `
+                <img src="${item}" class="w-full rounded-lg shadow-md mb-2" loading="lazy">
+              `}
+              <a href="${item}" download class="inline-block mt-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
+                ⬇️ Download ⬇️
+              </a>
+            </div>
+          `;
+        }).join("");
 
       } catch (error) {
         console.error(error);
