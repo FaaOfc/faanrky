@@ -71,51 +71,49 @@
 
   <!-- Script -->
   <script>
-    async function downloadMedia() {
-      const url = document.getElementById('urlInput').value;
-      const resultContainer = document.getElementById('result');
-      resultContainer.innerHTML = "<p class='text-gray-300'>Memuat...</p>";
+  async function downloadMedia() {
+    const url = document.getElementById('urlInput').value;
+    const resultContainer = document.getElementById('result');
+    resultContainer.innerHTML = "<p class='text-gray-300'>Memuat...</p>";
 
-      try {
-        const res = await fetch(`https://flowfalcon.dpdns.org/download/instagram?url=${encodeURIComponent(url)}`);
-        const data = await res.json();
+    try {
+      const res = await fetch(`https://flowfalcon.dpdns.org/download/instagram?url=${encodeURIComponent(url)}`);
+      const data = await res.json();
 
-        if (!data || !data.status || !data.result || !data.result.downloadUrls || data.result.downloadUrls.length === 0) {
-          resultContainer.innerHTML = "<p class='text-red-400'>Gagal mendapatkan media. Pastikan link valid!</p>";
-          return;
-        }
-
-        const urls = data.result.downloadUrls;
-
-resultContainer.innerHTML = urls.map(item => {
-  const isVideo = item.includes(".mp4");
-  return `
-    <div class="mb-4">
-      ${isVideo ? `
-        <video controls class="w-full rounded-lg shadow-md mb-2">
-          <source src="${item}" type="video/mp4">
-        </video>
-      ` : `
-        <img src="${item}" class="w-full rounded-lg shadow-md mb-2" loading="lazy" alt="Preview Gambar Instagram">
-      `}
-      <a href="${item}" download class="inline-block mt-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
-        ⬇️ Download
-      </a>
-    </div>
-  `;
-        }).join("");
-
-      } catch (error) {
-        console.error(error);
-        resultContainer.innerHTML = "<p class='text-red-400'>Terjadi kesalahan saat menghubungi API.</p>";
+      if (!data || !data.status || !data.result || !data.result.downloadUrls || data.result.downloadUrls.length === 0) {
+        resultContainer.innerHTML = "<p class='text-red-400'>Gagal mendapatkan media. Pastikan link valid!</p>";
+        return;
       }
-    }
 
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
-      document.body.classList.toggle('bg-gray-100');
-      document.body.classList.toggle('text-black');
+      const urls = data.result.downloadUrls;
+      const thumbnail = data.result.thumbnail;
+
+      resultContainer.innerHTML = `
+        <img src="${thumbnail}" alt="Thumbnail" class="w-full rounded-lg shadow-md mb-4">
+        ${urls.map((item, index) => {
+          const isVideo = item.includes(".mp4");
+          const label = isVideo ? `⬇️ DOWNLOAD VIDEO ${index + 1} ⬇️` : `⬇️ DOWNLOAD FOTO ${index + 1} ⬇️`;
+          return `
+            <div class="mb-3">
+              <a href="${item}" download class="block w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded text-center">
+                ${label}
+              </a>
+            </div>
+          `;
+        }).join("")}
+      `;
+
+    } catch (error) {
+      console.error(error);
+      resultContainer.innerHTML = "<p class='text-red-400'>Terjadi kesalahan saat menghubungi API.</p>";
     }
-  </script>
+  }
+
+  function toggleTheme() {
+    document.documentElement.classList.toggle('dark');
+    document.body.classList.toggle('bg-gray-100');
+    document.body.classList.toggle('text-black');
+  }
+</script>
 </body>
 </html>
