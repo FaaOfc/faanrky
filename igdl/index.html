@@ -3,26 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IG Downloader by Faanrky</title>
+  <title>IGDL - Faanrky</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-    };
+    tailwind.config = { darkMode: 'class' };
   </script>
+  <style>
+    .floating-btn {
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 2px solid black;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    .floating-btn:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col justify-between">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col justify-between relative">
 
-  <!-- Header -->
-  <header class="py-6 text-center bg-gradient-to-r from-purple-700 to-indigo-700 shadow-md">
-    <h1 class="text-3xl font-bold tracking-wide">📥 Instagram Downloader</h1>
-    <p class="text-sm text-gray-200 mt-1">by Alfa — Powered by FlowFalcon API</p>
-  </header>
+  <!-- Tombol Kembali (Kiri Atas) -->
+  <a href="https://store.faanrky.my.id" class="floating-btn absolute top-4 left-4 z-50">
+    🔙 Beranda
+  </a>
 
-  <!-- Main Content -->
+  <!-- Tombol Ganti Tema (Kanan Atas) -->
+  <button onclick="toggleTheme()" class="floating-btn absolute top-4 right-4 z-50">
+    🌗 Tema
+  </button>
+
+  <!-- Kontainer utama -->
   <main class="flex-grow flex flex-col items-center justify-center p-6">
-    <div class="w-full max-w-md bg-gray-800 p-6 rounded-xl shadow-xl">
-      
+    <div class="w-full max-w-md bg-black bg-opacity-20 border border-black p-6 rounded-xl shadow-xl" style="margin: 0 15px;">
+      <h1 class="text-2xl font-bold mb-4 text-center">Instagram Downloader</h1>
+
       <label for="urlInput" class="block text-lg font-medium mb-2">Masukkan URL Instagram:</label>
       <input id="urlInput" type="text" placeholder="https://www.instagram.com/reel/..." class="w-full p-3 mb-4 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
 
@@ -32,58 +48,68 @@
 
       <div id="result" class="mt-6 space-y-4 text-center"></div>
     </div>
-
-    <!-- Tombol Tema -->
-    <button onclick="toggleTheme()" class="mt-6 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-sm">
-      🌗 Ganti Tema
-    </button>
-
-    <!-- Tombol Kembali -->
-    <a href="https://faaofc.my.id" class="mt-4 inline-block text-center px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded transition duration-200">
-      🔙 Kembali ke Beranda
-    </a>
   </main>
 
   <!-- Footer -->
-  <footer class="text-center text-sm p-4 bg-gray-800 text-gray-400">
-    &copy; 2025 Faanrky. All rights reserved.
+  <footer class="text-center text-sm p-4 text-gray-400">
+    &copy; 2025 Alfa. All rights reserved.
   </footer>
 
   <!-- Script -->
   <script>
-  async function downloadMedia() {
-    const url = document.getElementById('urlInput').value;
-    const resultContainer = document.getElementById('result');
-    resultContainer.innerHTML = "<p class='text-gray-300'>Memuat...</p>";
+    async function downloadMedia() {
+      const url = document.getElementById('urlInput').value;
+      const resultContainer = document.getElementById('result');
+      resultContainer.innerHTML = "<p class='text-gray-300'>Memuat...</p>";
 
-    try {
-      const res = await fetch(`https://flowfalcon.dpdns.org/download/instagram?url=${encodeURIComponent(url)}`);
-      const data = await res.json();
+      try {
+        const res = await fetch(`https://flowfalcon.dpdns.org/download/instagram?url=${encodeURIComponent(url)}`);
+        const data = await res.json();
 
-      if (!data || !data.status || !data.result || !data.result.downloadUrls || data.result.downloadUrls.length === 0) {
-        resultContainer.innerHTML = "<p class='text-red-400'>Gagal mendapatkan media. Pastikan link valid!</p>";
-        return;
+        if (!data || !data.status || !data.result || !data.result.downloadUrls || data.result.downloadUrls.length === 0) {
+          resultContainer.innerHTML = "<p class='text-red-400'>Gagal mendapatkan media. Pastikan link valid!</p>";
+          return;
+        }
+
+        const title = data.result.title || "Video Instagram";
+        const thumbnail = data.result.thumbnail;
+        const urls = data.result.downloadUrls;
+
+        resultContainer.innerHTML = `
+          <div class="text-left">
+            <h2 class="text-xl font-semibold mb-2">${title}</h2>
+            <img src="${thumbnail}" alt="Thumbnail" class="w-full rounded-lg mb-4 shadow-md">
+          </div>
+          ${urls.map(item => {
+            const isVideo = item.includes(".mp4");
+            return `
+              <div class="mb-4">
+                ${isVideo ? `
+                  <video controls class="w-full rounded-lg shadow-md mb-2">
+                    <source src="${item}" type="video/mp4">
+                  </video>
+                ` : `
+                  <img src="${item}" class="w-full rounded-lg shadow-md mb-2" loading="lazy">
+                `}
+                <a href="${item}" download class="inline-block mt-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
+                  ⬇️ Download
+                </a>
+              </div>
+            `;
+          }).join("")}
+        `;
+
+      } catch (error) {
+        console.error(error);
+        resultContainer.innerHTML = "<p class='text-red-400'>Terjadi kesalahan saat menghubungi API.</p>";
       }
-
-      // Tampilkan video/gambar
-      resultContainer.innerHTML = data.result.downloadUrls.map(item => {
-        const isVideo = item.includes(".mp4");
-        return isVideo
-          ? `<video controls class="w-full rounded-lg shadow-md"><source src="${item}" type="video/mp4"></video>`
-          : `<img src="${item}" class="w-full rounded-lg shadow-md" loading="lazy">`;
-      }).join("");
-
-    } catch (error) {
-      console.error(error);
-      resultContainer.innerHTML = "<p class='text-red-400'>Terjadi kesalahan saat menghubungi API.</p>";
     }
-  }
 
-  function toggleTheme() {
-    document.documentElement.classList.toggle('dark');
-    document.body.classList.toggle('bg-gray-100');
-    document.body.classList.toggle('text-black');
-  }
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      document.body.classList.toggle('bg-gray-100');
+      document.body.classList.toggle('text-black');
+    }
   </script>
 </body>
 </html>
