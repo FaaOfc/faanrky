@@ -170,14 +170,10 @@ function renderFeaturedCategories(categories) {
 // Fungsi untuk mendapatkan ikon kategori berdasarkan ID
   const getCategoryIcon = (categoryId) => {
     const iconMap = {
-      'elektronik': 'fa-mobile-alt',
-      'fashion': 'fa-tshirt',
-      'kesehatan': 'fa-heartbeat',
-      'makanan': 'fa-utensils',
-      'aksesoris': 'fa-gem',
-      'buku': 'fa-book',
-      'olahraga': 'fa-running',
-      'rumah': 'fa-home'
+      'suntik': 'fa-mobile-alt',
+      'vps': 'fa-computer',
+      'game': 'fa-gamepad',
+      'other': 'fa-list'
     };
     
     return iconMap[categoryId] || 'fa-tag';
