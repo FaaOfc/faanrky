@@ -19,24 +19,20 @@
     },
     "categories": [
       {
-        "id": "elektronik",
-        "name": "Elektronik"
+        "id": "suntik",
+        "name": "Suntik Sosmed"
       },
       {
-        "id": "fashion",
-        "name": "Fashion"
+        "id": "vps",
+        "name": "Hosting Bot & Server"
       },
       {
-        "id": "aksesoris",
-        "name": "Aksesoris"
+        "id": "game",
+        "name": "Top Up Game"
       },
       {
-        "id": "kesehatan",
-        "name": "Kesehatan & Kecantikan"
-      },
-      {
-        "id": "rumah",
-        "name": "Rumah & Lifestyle"
+        "id": "Other",
+        "name": "Barang Lainnya"
       }
     ],
     "products": [
