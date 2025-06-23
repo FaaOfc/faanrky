@@ -171,7 +171,7 @@ function renderFeaturedCategories(categories) {
   const getCategoryIcon = (categoryId) => {
     const iconMap = {
       'suntik': 'fa-mobile-alt',
-      'vps': 'fa-computer',
+      'vps': 'fa-server',
       'game': 'fa-gamepad',
       'other': 'fa-list'
     };
