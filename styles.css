@@ -1,12 +1,13 @@
 /* Reset dan styling dasar */
 :root {
-  --background-color: #140000;
+  --background-color: #1b1a1c;
   --text-color: #e0e0e0;
   --text-light: #e0e0e0;
   --primary-color: #b50000;
   --secondary-color: #d10000;
-  --accent-color: #282a2b;
+  --accent-color: #b50000;
   --card-color: #2d3748;
+  --header: #e0e0e0;
     --border-radius: 12px;
     --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -95,7 +96,7 @@ img {
 
 /* Header */
 .header {
-    background-color: var(--card-color);
+    background-color: var(--header);
     box-shadow: var(--shadow-sm);
     padding: 15px 0;
     position: sticky;
