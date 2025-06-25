@@ -1,69 +1,112 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hitamkan Gambar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AIO Downloader by Alfa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen px-4 py-8">
-  <h1 class="text-2xl font-bold mb-6">🖤 Hitamkan Gambar via API</h1>
-
-  <input type="file" id="fileInput" accept="image/*" class="mb-4 bg-gray-800 p-2 rounded">
-  <button onclick="uploadImage()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded font-semibold">
-    Upload & Hitamkan
-  </button>
-
-  <div id="loading" class="mt-4 text-yellow-400 hidden">Mengunggah & memproses gambar...</div>
-  <div id="result" class="mt-6 space-y-4 text-center"></div>
-
   <script>
-    const API_KEY = "4208690edee5e0d82fb22ab441348ba6"; // GANTI DENGAN KEY KAMU
-
-    async function uploadImage() {
-      const fileInput = document.getElementById("fileInput");
-      const loading = document.getElementById("loading");
-      const result = document.getElementById("result");
-      result.innerHTML = "";
-      loading.classList.remove("hidden");
-
-      const file = fileInput.files[0];
-      if (!file) {
-        loading.classList.add("hidden");
-        return alert("Pilih gambar terlebih dahulu!");
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            bungee: ['Bungee', 'cursive']
+          }
+        }
       }
+    };
+  </script>
+  <style>
+    .floating-btn {
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 2px solid black;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+    .floating-btn:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col justify-between font-bungee relative">
 
-      const formData = new FormData();
-      formData.append("image", file);
+  <!-- Tombol Kembali & Tema -->
+  <a href="https://faaofc.my.id" class="floating-btn absolute top-4 left-4 z-50">🔙 Beranda</a>
+  <button onclick="toggleTheme()" class="floating-btn absolute top-4 right-4 z-50">🌗 Tema</button>
+
+  <!-- Judul -->
+  <div class="mt-20 flex justify-center">
+    <div class="floating-btn text-center">
+      📥 AIO Downloader<br>
+      <span class="text-xs">Powered by FlowFalcon API</span>
+    </div>
+  </div>
+
+  <!-- Form Input -->
+  <main class="flex-grow flex flex-col items-center justify-center p-6">
+    <div class="w-full max-w-md bg-gray-800 p-6 rounded-xl shadow-xl">
+      <label for="urlInput" class="block text-lg font-medium mb-2">Masukkan URL:</label>
+      <input id="urlInput" type="text" placeholder="https://www.instagram.com/reel/..." class="w-full p-3 mb-4 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
+      <button onclick="downloadMedia()" class="w-full bg-purple-600 hover:bg-purple-700 transition-colors p-3 rounded font-semibold">
+        Download
+      </button>
+      <div id="result" class="mt-6 space-y-4 text-center"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm p-4 text-gray-400">
+    &copy; 2025 Alfa. All rights reserved.
+  </footer>
+
+  <!-- Script -->
+  <script>
+    async function downloadMedia() {
+      const url = document.getElementById('urlInput').value;
+      const resultContainer = document.getElementById('result');
+      resultContainer.innerHTML = "<p class='text-gray-300'>Memuat...</p>";
 
       try {
-        // Upload ke ImgBB
-        const imgbbRes = await fetch(`https://api.imgbb.com/1/upload?key=${API_KEY}`, {
-          method: "POST",
-          body: formData
-        });
-        const imgbbData = await imgbbRes.json();
-        const imageUrl = imgbbData.data.url;
+        const res = await fetch(`https://flowfalcon.dpdns.org/download/aio?url=${encodeURIComponent(url)}`);
+        const data = await res.json();
 
-        // Kirim ke API hitamkan
-        const blackRes = await fetch(`https://zenzxz.dpdns.org/tools/hitamkan?imageUrl=${encodeURIComponent(imageUrl)}`);
-        const blackBlob = await blackRes.blob();
-        const blackUrl = URL.createObjectURL(blackBlob);
+        if (!data || !data.status || !data.result || !data.result.downloadUrls || data.result.downloadUrls.length === 0) {
+          resultContainer.innerHTML = "<p class='text-red-400'>Gagal mendapatkan media. Pastikan link valid!</p>";
+          return;
+        }
 
-        // Tampilkan hasil
-        loading.classList.add("hidden");
-        result.innerHTML = `
-          <p class="text-lg font-medium">✅ Gambar berhasil dihitamkan:</p>
-          <img src="${blackUrl}" alt="Hasil Hitamkan" class="mx-auto rounded shadow max-w-full max-h-[400px]">
-          <a href="${blackUrl}" download="hitamkan.jpg" class="inline-block mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded">
-            ⬇️ Download Gambar
-          </a>
+        const urls = data.result.downloadUrls;
+        const thumbnail = data.result.thumbnail;
+
+        // Thumbnail preview pertama
+        resultContainer.innerHTML = `
+          ${thumbnail ? `<img src="${thumbnail}" alt="Thumbnail" class="w-full rounded-lg shadow-md mb-4">` : ''}
+          ${urls.map((item, index) => {
+            const isVideo = item.includes(".mp4");
+            const label = isVideo ? `⬇️ DOWNLOAD VIDEO ${index + 1} ⬇️` : `⬇️ DOWNLOAD FOTO ${index + 1} ⬇️`;
+            return `
+              <div class="mb-3">
+                <a href="${item}" download class="block w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded text-center">
+                  ${label}
+                </a>
+              </div>
+            `;
+          }).join("")}
         `;
       } catch (error) {
         console.error(error);
-        loading.classList.add("hidden");
-        result.innerHTML = `<p class="text-red-400">❌ Gagal memproses gambar. Coba lagi.</p>`;
+        resultContainer.innerHTML = "<p class='text-red-400'>❌ Terjadi kesalahan saat menghubungi API.</p>";
       }
+    }
+
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+      document.body.classList.toggle('bg-gray-100');
+      document.body.classList.toggle('text-black');
     }
   </script>
 </body>
