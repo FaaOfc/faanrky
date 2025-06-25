@@ -41,7 +41,7 @@
   <!-- Judul -->
   <div class="mt-20 flex justify-center">
     <div class="floating-btn text-center">
-      📥 AIO Downloader<br>
+      📥 AIO Instagram Downloader<br>
       <span class="text-xs">Powered by FlowFalcon API</span>
     </div>
   </div>
@@ -49,7 +49,7 @@
   <!-- Form Input -->
   <main class="flex-grow flex flex-col items-center justify-center p-6">
     <div class="w-full max-w-md bg-gray-800 p-6 rounded-xl shadow-xl">
-      <label for="urlInput" class="block text-lg font-medium mb-2">Masukkan URL:</label>
+      <label for="urlInput" class="block text-lg font-medium mb-2">Masukkan URL Instagram:</label>
       <input id="urlInput" type="text" placeholder="https://www.instagram.com/reel/..." class="w-full p-3 mb-4 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
       <button onclick="downloadMedia()" class="w-full bg-purple-600 hover:bg-purple-700 transition-colors p-3 rounded font-semibold">
         Download
@@ -66,7 +66,7 @@
   <!-- Script -->
   <script>
     async function downloadMedia() {
-      const url = document.getElementById('urlInput').value;
+      const url = document.getElementById('urlInput').value.trim();
       const resultContainer = document.getElementById('result');
       resultContainer.innerHTML = "<p class='text-gray-300'>Memuat...</p>";
 
@@ -74,32 +74,25 @@
         const res = await fetch(`https://flowfalcon.dpdns.org/download/aio?url=${encodeURIComponent(url)}`);
         const data = await res.json();
 
-        if (!data || !data.status || !data.result || !data.result.downloadUrls || data.result.downloadUrls.length === 0) {
-          resultContainer.innerHTML = "<p class='text-red-400'>Gagal mendapatkan media. Pastikan link valid!</p>";
+        if (!data.status || !data.result || !data.result.video) {
+          resultContainer.innerHTML = "<p class='text-red-400'>❌ Gagal mengambil video. Coba pastikan URL valid.</p>";
           return;
         }
 
-        const urls = data.result.downloadUrls;
-        const thumbnail = data.result.thumbnail;
+        const thumb = data.result.thumb;
+        const videoUrl = data.result.video;
+        const title = data.result.title?.split("\n")[0] || "Tanpa Judul";
 
-        // Thumbnail preview pertama
         resultContainer.innerHTML = `
-          ${thumbnail ? `<img src="${thumbnail}" alt="Thumbnail" class="w-full rounded-lg shadow-md mb-4">` : ''}
-          ${urls.map((item, index) => {
-            const isVideo = item.includes(".mp4");
-            const label = isVideo ? `⬇️ DOWNLOAD VIDEO ${index + 1} ⬇️` : `⬇️ DOWNLOAD FOTO ${index + 1} ⬇️`;
-            return `
-              <div class="mb-3">
-                <a href="${item}" download class="block w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded text-center">
-                  ${label}
-                </a>
-              </div>
-            `;
-          }).join("")}
+          ${thumb ? `<img src="${thumb}" alt="Thumbnail" class="w-full rounded-lg shadow-md mb-4">` : ""}
+          <h2 class="text-lg font-semibold mb-2">${title}</h2>
+          <a href="${videoUrl}" download class="block w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded text-center">
+            ⬇️ DOWNLOAD VIDEO ⬇️
+          </a>
         `;
-      } catch (error) {
-        console.error(error);
-        resultContainer.innerHTML = "<p class='text-red-400'>❌ Terjadi kesalahan saat menghubungi API.</p>";
+      } catch (err) {
+        console.error(err);
+        resultContainer.innerHTML = "<p class='text-red-400'>❌ Terjadi kesalahan saat menghubungi server.</p>";
       }
     }
 
