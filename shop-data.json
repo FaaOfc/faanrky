@@ -43,7 +43,7 @@
         "price": "Rp 30.000",
         "description": "Virtual Private Server ( VPS ), menggunakan provider DigitalOcean dengan masa aktif sampai 30 hari jika tidak melanggar peraturan.",
         "image": "https://stock.adobe.com/id/images/connection-network-in-servers-data-center-room-storage-systems-3d-rendering/302854234",
-        "link": "https://main.faanrky.my.id/vps",
+        "link": "https://main.faanrky.my.id/vps"
       },
       {
         "id": "panel",
@@ -52,7 +52,7 @@
         "price": "Rp 2.000",
         "description": "Panel untuk menjalankan Bot WhatsApp tanpa resiko di intip",
         "image": "https://stock.adobe.com/id/images/connection-network-in-servers-data-center-room-storage-systems-3d-rendering/302854234",
-        "link": "https://main.faanrky.my.id/panel-priv",
+        "link": "https://main.faanrky.my.id/panel-priv"
       },
       {
         "id": "panel2",
@@ -61,7 +61,7 @@
         "price": "Rp 1.000",
         "description": "Panel untuk menjalankan Bot Whatsap dengan harga murah",
         "image": "https://stock.adobe.com/id/images/connection-network-in-servers-data-center-room-storage-systems-3d-rendering/302854234",
-        "link": "https://main.faanrky.my.id/panel-pub",
+        "link": "https://main.faanrky.my.id/panel-pub"
       },
       {
         "id": "suntik",
@@ -70,7 +70,7 @@
         "price": "Rp 30.000",
         "description": "Suntik Sosmed untuk menambahkan Followers, Like, dan Views",
         "image": "https://stock.adobe.com/id/images/businessman-holding-a-cloud-of-social-media-network-icon/313058993",
-        "link": "https://main.faanrky.my.id/vps",
+        "link": "https://main.faanrky.my.id/vps"
       },
       {
         "id": "topupml",
@@ -79,7 +79,7 @@
         "price": "Rp 5.000",
         "description": "Top Up game Mobile Legend, tersedia Diamond dan Membership",
         "image": "https://stock.adobe.com/id/images/black-standard-geypad-headphones-and-game-console-in-the-background-on-a-blue-background-3d-rendering/305612456",
-        "link": "https://main.faanrky.my.id/topup-ml",
+        "link": "https://main.faanrky.my.id/topup-ml"
       },
       {
         "id": "topupff",
@@ -88,7 +88,7 @@
         "price": "Rp 5.000",
         "description": "Top Up game Free Fire, Tersedia Diamond dan Membership",
         "image": "https://stock.adobe.com/id/images/black-standard-geypad-headphones-and-game-console-in-the-background-on-a-blue-background-3d-rendering/305612456",
-        "link": "https://main.faanrky.my.id/topup-ff",
+        "link": "https://main.faanrky.my.id/topup-ff"
       },
       {
         "id": "topupgi",
@@ -97,7 +97,7 @@
         "price": "Rp 12.000",
         "description": "Top Up game Genshin Impact, Tersedia Genesis Crystal dan Blessing Welkin Moon",
         "image": "https://stock.adobe.com/id/images/black-standard-geypad-headphones-and-game-console-in-the-background-on-a-blue-background-3d-rendering/305612456",
-        "link": "https://main.faanrky.my.id/topup-gi",
+        "link": "https://main.faanrky.my.id/topup-gi"
       },
       {
         "id": "topuppubg",
@@ -106,7 +106,7 @@
         "price": "Rp 5.000",
         "description": "Top Up game PUBG Mobile, tersedia UC",
         "image": "https://stock.adobe.com/id/images/black-standard-geypad-headphones-and-game-console-in-the-background-on-a-blue-background-3d-rendering/305612456",
-        "link": "https://main.faanrky.my.id/topup-pubg",
+        "link": "https://main.faanrky.my.id/topup-pubg"
       },
       {
         "id": "topupcod",
@@ -115,7 +115,7 @@
         "price": "Rp 30.000",
         "description": "Top Up game COD Mobile, tersedia CP",
         "image": "https://stock.adobe.com/id/images/black-standard-geypad-headphones-and-game-console-in-the-background-on-a-blue-background-3d-rendering/305612456",
-        "link": "https://main.faanrky.my.id/topup-cod",
+        "link": "https://main.faanrky.my.id/topup-cod"
       },
       {
         "id": "sewabot",
@@ -124,7 +124,7 @@
         "price": "Rp 30.000",
         "description": "Sewa Bot WhatsApp, tersedia bot RPG, AI, dan khusus menjaga grup",
         "image": "https://stock.adobe.com/id/images/chatbot-isometric-color-vector-illustration/270370865",
-        "link": "https://main.faanrky.my.id/sewabot",
+        "link": "https://main.faanrky.my.id/sewabot"
       }
     ]
   }
