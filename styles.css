@@ -656,7 +656,7 @@ img {
 
 /* About Section */
 .about-section {
-    background-color: var(--card-color);
+    background-color: var(--header);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-sm);
     padding: 60px 0;
