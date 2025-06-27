@@ -762,7 +762,7 @@ img {
 
 /* Newsletter Section */
 .newsletter-section {
-    background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+    background: var(--header);
     padding: 80px 0;
     color: white;
     position: relative;
