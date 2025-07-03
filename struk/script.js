@@ -1,5 +1,5 @@
 let barangList = [];
-const namaToko = "FlowFalcon";
+const namaToko = "FAANRKY STORE";
 const footerText = `TERIMA KASIH TELAH BELANJA Di\n${namaToko}`;
 
 function tambahBarang() {
