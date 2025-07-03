@@ -1,6 +1,6 @@
 let barangList = [];
-const namaToko = "FAANRKY STORE";
-const footerText = `TERIMA KASIH TELAH BELANJA Di\n${namaToko}`;
+const namaToko = "- FAANRKY STORE -";
+const footerText = `TERIMA KASIH TELAH BELANJA DI\n${namaToko}`;
 
 function tambahBarang() {
     const namaBarang = document.getElementById("namaBarang").value;
